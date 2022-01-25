@@ -1,5 +1,6 @@
 # honeypot-detector-cli
 Honeypot detector simulates a buy and a sell transaction to determine if a token is a honeypot.
+<br />
 ![PHP](https://img.shields.io/badge/language-PHP-blue.svg)
 ![BANDITCODING](https://img.shields.io/badge/Team-Banditcoding-green)
 ![AUTHOR](https://img.shields.io/badge/Author-Zlaxtert-orange)
