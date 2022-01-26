@@ -28,7 +28,7 @@ if($chain == '1'){
 }
 
 $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://api.banditcoding.xyz/honeypot/?chain=$net&token=$token");
+    curl_setopt($ch, CURLOPT_URL, "https://api.banditcoding.xyz/honeypot/?chain=$net&address=$token");
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -44,18 +44,30 @@ $ch = curl_init();
     }
 
     $net = strtoupper($net);
-    $pot      = $json['data']['honeypot'];
-    $err      = $json['data']['error'];
-    $maxtx    = $json['data']['MaxTaxAmount'];
-    $maxtxBNB = $json['data']['MaxTxAmountBNB'];
-    $buytx    = $json['data']['BuyTax'];
-    $selltx   = $json['data']['SellTax'];
-    $buygas   = $json['data']['BuyGas'];
-    $sellgas  = $json['data']['SellGas'];
+    $symbol   = $json['data']['symbol'];
+    $nameC    = $json['data']['name'];
+    $decimal  = $json['data']['decimals'];
+    $webC     = $json['data']['officialwebsite'];
+    $icon     = $json['data']['icon'];
+        $ex = explode("?",$icon);
+        $link = $ex[0];
+    $pot      = $json['data']['info']['honeypot'];
+    $err      = $json['data']['info']['error'];
+    $maxtx    = $json['data']['info']['MaxTaxAmount'];
+    $maxtxBNB = $json['data']['info']['MaxTxAmountBNB'];
+    $buytx    = $json['data']['info']['BuyTax'];
+    $selltx   = $json['data']['info']['SellTax'];
+    $buygas   = $json['data']['info']['BuyGas'];
+    $sellgas  = $json['data']['info']['SellGas'];
     
 $result = "
 
 ================[Result]================
+ NAME             : $nameC
+ SYMBOL           : $symbol
+ DECIMALS         : $decimal
+ WEBSITE          : $webC
+ ICON             : $link
  HONEYPOT         : $pot $cek
  NETWORK          : $net
  CONTRACT ADDRESS : $token
