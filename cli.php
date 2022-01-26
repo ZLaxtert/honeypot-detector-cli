@@ -48,9 +48,6 @@ $ch = curl_init();
     $nameC    = $json['data']['name'];
     $decimal  = $json['data']['decimals'];
     $webC     = $json['data']['officialwebsite'];
-    $icon     = $json['data']['icon'];
-        $ex = explode("?",$icon);
-        $link = $ex[0];
     $pot      = $json['data']['info']['honeypot'];
     $err      = $json['data']['info']['error'];
     $maxtx    = $json['data']['info']['MaxTaxAmount'];
@@ -67,7 +64,6 @@ $result = "
  SYMBOL           : $symbol
  DECIMALS         : $decimal
  WEBSITE          : $webC
- ICON             : $link
  HONEYPOT         : $pot $cek
  NETWORK          : $net
  CONTRACT ADDRESS : $token
