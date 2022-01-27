@@ -34,20 +34,15 @@ $ch = curl_init();
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     $res = curl_exec($ch);
     $json = json_decode($res, TRUE);
-    if(strpos($res, '"msg":"Token not compatible with Chain!"')){
-        exit("\n\n[!] Token not compatible with network! [!]\n\n");
-    }
-    if(strpos($res, '"honeypot":"No"')){
-        $cek = "✅";
-    }else{
-        $cek = "❌";
-    }
-
+    
     $net = strtoupper($net);
     $symbol   = $json['data']['symbol'];
     $nameC    = $json['data']['name'];
     $decimal  = $json['data']['decimals'];
     $webC     = $json['data']['officialwebsite'];
+    $icon     = $json['data']['icon'];
+        $ex = explode("?",$icon);
+        $link = $ex[0];
     $pot      = $json['data']['info']['honeypot'];
     $err      = $json['data']['info']['error'];
     $maxtx    = $json['data']['info']['MaxTaxAmount'];
@@ -57,14 +52,22 @@ $ch = curl_init();
     $buygas   = $json['data']['info']['BuyGas'];
     $sellgas  = $json['data']['info']['SellGas'];
     
-$result = "
+    
+    if(strpos($res, '"msg":"Token not compatible with Chain!"')){
+        exit("\n\n[!] Token not compatible with network! [!]\n\n");
+    }
+    if(strpos($res, '"honeypot":"No"')){
+        $cek = '✅ This contract address is not a honeypot ✅ ';
+        system("clear");
+        echo "
 
 ================[Result]================
  NAME             : $nameC
  SYMBOL           : $symbol
  DECIMALS         : $decimal
  WEBSITE          : $webC
- HONEYPOT         : $pot $cek
+ HONEYPOT         : $pot
+ MESSAGE          : $cek
  NETWORK          : $net
  CONTRACT ADDRESS : $token
  MAX TAX AMOUNT   : $maxtx
@@ -76,9 +79,26 @@ $result = "
 ========================================
 
 ";
+    }else{
+        $cek  = '❌ Yes, this is a honeypot! ❌ ';
+                        
+        system("clear");
+        echo "
 
-system("clear");
-echo $result;
+================[Result]================
+ NAME             : $nameC
+ SYMBOL           : $symbol
+ DECIMALS         : $decimal
+ WEBSITE          : $webC
+ HONEYPOT         : $pot 
+ MESSAGE          : $cek
+ ERROR            : $err
+ NETWORK          : $net
+ CONTRACT ADDRESS : $token
+========================================
+
+";
+    }
 
 function banner(){
     
